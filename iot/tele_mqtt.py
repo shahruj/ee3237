@@ -6,6 +6,7 @@ import logging
 import socket
 
 temp = "36.8"
+pressure = " "
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Greeting  {}'.format(update.message.from_user.first_name))
@@ -16,17 +17,21 @@ def hello(update, context):
 
 def status(update, context):
     global temp
+    global pressure
     # ToBe edited
     with open('data.txt','r') as f:
         for line in f:
-            temp = line
+            if "[sensor/bluetooth/temp]" in line:
+                temp = line
+            if "[sensor/bluetooth/pressure]" in line:
+                pressure = line
     status = "Normal"
     #temp = "36.8"
     heart_rate = "Beep Beep"
     ECG = "Zap Zap"
     msg = ("Status: " + status +
     	"\nTemperature: " + temp + "°C" + 
-    	"\nHeart Rate: " + heart_rate + "\nECG: " + ECG)
+    	"\nHeart Rate: " + heart_rate + "\nPressure: " + pressure)
 
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
