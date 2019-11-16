@@ -29,9 +29,15 @@ def status(update, context):
     #temp = "36.8"
     heart_rate = "Beep Beep"
     ECG = "Zap Zap"
-    msg = ("Status: " + status +
-    	"\nTemperature: " + temp + "°C" + 
-    	"\nHeart Rate: " + heart_rate + "\nPressure: " + pressure)
+    if (temp > 37.6): 
+	msg = ("Status: " + status +
+    		"\nTemperature: " + temp + "°C" + 
+    		"\nHeart Rate: " + heart_rate + "\nPressure: " + pressure +
+		"\nUser has a fever!")
+    else: 
+    	msg = ("Status: " + status +
+    		"\nTemperature: " + temp + "°C" + 
+    		"\nHeart Rate: " + heart_rate + "\nPressure: " + pressure)
 
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
