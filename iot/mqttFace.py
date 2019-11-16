@@ -19,7 +19,7 @@ client.on_connect = on_connect
 client.on_message = on_message 
 
 print("Connecting")
-client.connect("192.168.43.239", 1883, 60) 
+client.connect("localhost", 1883, 60) 
 client.loop_forever() 
 
 #192.168.43.239
