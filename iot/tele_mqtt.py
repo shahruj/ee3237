@@ -34,6 +34,17 @@ def status(update, context):
     	"\nHeart Rate: " + heart_rate + "\nPressure: " + pressure)
 
     context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
+    
+def facial(update, context):
+    expression = ""
+    with open('faceData.txt','r') as f:
+        for line in f:
+            if "[face]" in line:
+                expression = line
+    #temp = "36.8"
+    msg = (expression)
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text=msg)
 
 def unknown(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command.")
@@ -56,6 +67,8 @@ def main():
     dispatcher.add_handler(CommandHandler('hello', hello))
 
     dispatcher.add_handler(CommandHandler('status', status))
+    
+    dispatcher.add_handler(CommandHandler('facial', facial))
 
     unknown_handler = MessageHandler(Filters.command, unknown)
     dispatcher.add_handler(unknown_handler)
